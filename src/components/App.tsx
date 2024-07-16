@@ -10,6 +10,7 @@ import {
 import { Dashboard } from './Dashboard';
 import { Login } from './Login';
 import { ForgotPassword } from './ForgotPassword';
+import { UpdateProfile } from './UpdateProfile';
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ function App() {
     {
       path: "/forgot-password",
       element: <ForgotPassword />
+    },
+    {
+      path: "/update-profile",
+      element: <UpdateProfile />
     },
   ]);
 
