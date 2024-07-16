@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Signup } from './Signup'
+import { Signup } from './authentication/Signup'
 import { Container } from "react-bootstrap"
 import { AuthProvider } from '../contexts/AuthContext'
 
@@ -8,9 +8,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Dashboard } from './Dashboard';
-import { Login } from './Login';
-import { ForgotPassword } from './ForgotPassword';
-import { UpdateProfile } from './UpdateProfile';
+import { Login } from './authentication/Login';
+import { ForgotPassword } from './authentication/ForgotPassword';
+import { UpdateProfile } from './authentication/UpdateProfile';
 
 function App() {
   const router = createBrowserRouter([
