@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { getAuth, createUserWithEmailAndPassword, User } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, User, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../firebase';
 import { child } from 'firebase/database';
 
 type TAuth = {
     currentUser: User | null
     signup: (email: string, password: string) => void
+    login: (email: string, password: string) => void
+    logout: () => void
 }
 const AuthContext = React.createContext<TAuth>({ currentUser: null, signup: () => { } })
 
@@ -26,6 +28,13 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
         createUserWithEmailAndPassword(auth, email, password)
     }
 
+    function login(email: string, password: string) {
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    function logout() {
+        return signOut(auth)
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -37,7 +46,9 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
 
     const value: TAuth = {
         currentUser,
-        signup
+        signup,
+        login,
+        logout
     }
     return (
         <AuthContext.Provider value={value}>

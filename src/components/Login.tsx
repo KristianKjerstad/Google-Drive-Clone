@@ -1,7 +1,8 @@
 
 import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { useRef, useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from '../contexts/AuthContext';
 
 export function Login() {
 
@@ -9,13 +10,16 @@ export function Login() {
     const passwordRef = useRef()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
+    const { login } = useAuth()
+    const navigate = useNavigate()
 
     async function handleSubmit(e) {
         e.preventDefault()
         try {
             setError("")
             setLoading(true)
-
+            await login(emailRef.current.value ?? "", passwordRef.current.value ?? "")
+            navigate("/")
         } catch {
             setError("Failed to log in")
         } finally {
