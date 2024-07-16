@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Dashboard } from './Dashboard';
 import { Login } from './Login';
+import { ForgotPassword } from './ForgotPassword';
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
     {
       path: "/login",
       element: <Login />
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />
     },
   ]);
 
