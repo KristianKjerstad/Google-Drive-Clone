@@ -7,7 +7,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Dashboard } from './Dashboard';
+import { Profile } from './authentication/Profile';
 import { Login } from './authentication/Login';
 import { ForgotPassword } from './authentication/ForgotPassword';
 import { UpdateProfile } from './authentication/UpdateProfile';
@@ -15,8 +15,8 @@ import { UpdateProfile } from './authentication/UpdateProfile';
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Dashboard />
+      path: "/user",
+      element: <Profile />
     },
     {
       path: "/signup",
@@ -38,13 +38,9 @@ function App() {
 
   return (
     <>
-      <Container className='d-flex align-items-center justify-content-center' style={{ minHeight: "100vh" }}>
-        <div className='w-100' style={{ maxWidth: "400px" }}>
-          <AuthProvider>
-            <RouterProvider router={router} />
-          </AuthProvider>
-        </div>
-      </Container>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }

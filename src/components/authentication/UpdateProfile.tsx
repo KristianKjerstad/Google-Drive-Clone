@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { useRef, useState } from "react"
+import { CenteredContainer } from "./centeredContainer";
 
 export function UpdateProfile() {
 
@@ -31,7 +32,7 @@ export function UpdateProfile() {
         }
 
         Promise.all(promises).then(() => {
-            navigate("/")
+            navigate("/user")
         }).catch(() => {
             setError("Failed to update account")
         }).finally(() => {
@@ -46,33 +47,35 @@ export function UpdateProfile() {
     }, [])
 
     return (
-        <div>
-            <Card>
-                <Card.Body>
-                    <h2 className='text-center mb-4'>Update profile</h2>
-                    {error && <Alert variant='danger'>{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group id="email" >
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" defaultValue={currentUser?.email} required ref={emailRef} />
-                        </Form.Group>
-                        <Form.Group id="password" >
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Leave blank to keep the same" ref={passwordRef} />
-                        </Form.Group>
-                        <Form.Group id="password-confirm">
-                            <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control type="password" placeholder="Leave blank to keep the same" ref={passwordConfirmRef} />
-                        </Form.Group>
-                        <Button disabled={loading} className='w-100 mt-4' type="submit">
-                            Update
-                        </Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <div className="w-100 text-center mt-2">
-                <Link to="/">Cancel</Link>
+        <CenteredContainer>
+            <div>
+                <Card>
+                    <Card.Body>
+                        <h2 className='text-center mb-4'>Update profile</h2>
+                        {error && <Alert variant='danger'>{error}</Alert>}
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group id="email" >
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" defaultValue={currentUser?.email} required ref={emailRef} />
+                            </Form.Group>
+                            <Form.Group id="password" >
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Leave blank to keep the same" ref={passwordRef} />
+                            </Form.Group>
+                            <Form.Group id="password-confirm">
+                                <Form.Label>Password Confirmation</Form.Label>
+                                <Form.Control type="password" placeholder="Leave blank to keep the same" ref={passwordConfirmRef} />
+                            </Form.Group>
+                            <Button disabled={loading} className='w-100 mt-4' type="submit">
+                                Update
+                            </Button>
+                        </Form>
+                    </Card.Body>
+                </Card>
+                <div className="w-100 text-center mt-2">
+                    <Link to="/user">Cancel</Link>
+                </div>
             </div>
-        </div>
+        </CenteredContainer>
     )
 }
